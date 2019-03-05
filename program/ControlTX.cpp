@@ -9,6 +9,10 @@ using namespace std;
 
 void ControlTX(int &stan, class SterowanieTX &ster, int socket_)
 {
+    cout<<"#############################################################################"<<endl;
+    cout<<"Sterowanie programem"<<endl;
+    cout<<"M xxx - zmiana przepływności na wartość xxx Mb/s"<<endl;
+    cout<<"E - zakonczenie pomiaru"<<endl;
     char change = {};
     char buffer[150];
     while (stan)
