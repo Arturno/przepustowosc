@@ -111,10 +111,7 @@ void transmitter()
     parametry.wypisanie();
     class SterowanieTX ster(parametry.przeplywnosc, parametry.rozmiar_pakietu);
     ster.wypisanie();
-    cout<<"#############################################################################"<<endl;
-    cout<<"Sterowanie programem"<<endl;
-    cout<<"M xxx - zmiana przepływności na wartość xxx Mb/s"<<endl;
-    cout<<"E - zakonczenie pomiaru"<<endl;
+
 
         
         thread sterowanieProgramem(ControlTX, ref(ster.stan), ref(ster), RXSocket);
