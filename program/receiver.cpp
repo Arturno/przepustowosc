@@ -11,7 +11,7 @@
 #include "odbieranie.cpp"
 #include "zapis.cpp"
 
-
+//Część slużąca odbieraniu i analizowaniu pakietów
 
 void pomiar2(int &stan, int &licznik, int rozmiar)
 {
@@ -33,8 +33,9 @@ void pomiar2(int &stan, int &licznik, int rozmiar)
     }
 }
 void receiver()
+//Główna funkcja służąca odbieraniu
 {
-    
+    //Tworzenie struktur przechowujących adresy
     struct sockaddr_in TX_TCP = {
         .sin_family = AF_INET,
         .sin_port = htons(8888)};
@@ -87,22 +88,25 @@ void receiver()
 
     char buffer[250];
     memset(buffer, 0, sizeof(buffer));
+    //pobranie parametrów transmisji od użytkownika 
     class OgolneInfo parametry;
     parametry.tochar(buffer);
     parametry.wypisanie();
+    //połączenie ze stroną nadawczą
     connect(socketTCP_, (struct sockaddr *)&TX_TCP, sizeof(TX_TCP));
-
+    //wysłanie parametrów do strony nadawczej
     if (send(socketTCP_, buffer, sizeof(buffer), 0) <= 0)
     {
         perror("send() ERROR");
         exit(6);
     }
-    //koniec ogolnego
+    //
     int pol=50;
     class SterowanieRX sterRX(pol);
 
     thread sterowanieProgramem(ControlRX, ref(sterRX.stan), ref(parametry.przeplywnosc), socketTCP_);
     thread pom(zapisipomiar, ref(parametry),ref(sterRX.polozenie), ref(sterRX.licznik), ref(sterRX.stan));
+    //W zależnosci od wybranego protokołu, uruchomienie odpowiedniej funkcji odpowiedzialnej za odbiór pakietów
     switch (parametry.protokol)
     {
     case 0:
