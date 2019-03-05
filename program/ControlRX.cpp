@@ -3,6 +3,9 @@
 #include <sys/socket.h>
 using namespace std;
 
+//Funkcja słuząca do zarządzania działaniem programu w części odbiorczej
+//Umożliwia zakonczenie programu w dowolnym momencie
+
 void ControlRX(int &stan, int &przeplywnosc, int socket_)
 {
     char buffer[150] = {};
