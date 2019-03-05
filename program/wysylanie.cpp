@@ -12,6 +12,8 @@
 
 using namespace std;
 
+//plik zawierający funkcje służące wysyłaniu pakietów za pomocą odpowiedniego protokolu
+
 void wysylanieUDP(struct sockaddr_in TX, struct sockaddr_in RX, int rozmiar_pakietu, int &opoznienie, int &grupa_pakietow, int &licznik, int &stan)
 {
     char buffer[rozmiar_pakietu + 1] = {};
